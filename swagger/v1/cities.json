@@ -1,0 +1,85 @@
+{
+    "swaggerVersion":"1.0",
+    "apiVersion":"0.1",
+    "resourcePath":"/v1",
+    "basePath":"http://cityprojects.ro/api/transport-api",
+    "apis":[{
+	"path":"/v1/cities",
+	"description":"Obtain information on available cities",
+	"operations":[{
+	    "summary":"List selected fields from all cities.",
+	    "httpMethod":"GET",
+	    "nickname":"getCities",
+	    "responseClass":"Array[City]",
+	    "parameters":[{
+		"name": "fields",
+		"description":"Selected field names",
+		"required":true,
+		"dataType":"comma sepparated strings",
+		"paramType":"query",
+		"allowMultiple":false
+	    }],
+	    "errorResponses":[{
+		"reason":"Invalid field names supplied in fields parameter",
+		"code":400
+		},{
+		"reason":"Not authenticated",
+		"code":403
+		}],
+	    "notes": "Returns a json array of City objects that contain only the fields specified in the request."
+	}]
+    },{
+	"path":"/v1/cities/{id}",
+	"description":"Obtain information on specified city",
+	"operations":[{
+	    "summary":"List selected fields from specified city.",
+	    "httpMethod":"GET",
+	    "nickname":"getCity",
+	    "responseClass":"City",
+	    "parameters":[{
+		"name": "id",
+		"description":"City id",
+		"required":true,
+		"dataType":"id",
+		"paramType":"path",
+		"allowMultiple":false
+	    },{
+		"name": "fields",
+		"description":"Selected field names",
+		"required":true,
+		"dataType":"comma sepparated strings",
+		"paramType":"query",
+		"allowMultiple":false
+	    }],
+	    "errorResponses":[{
+		"reason":"Invalid field names supplied in fields parameter",
+		"code":400
+		},{
+		"reason":"Not authenticated",
+		"code":403
+		},{
+		"reason":"No city exists with the given ID",
+		"code":404
+		}],
+	    "notes": "Returns a City object that contains only the fields specified in the request."
+	}]
+    }],
+    "models":{
+	"City":{
+	    "uniqueItems":true,
+	    "id":"City",
+	    "type":"any",
+	    "required":false,
+	    "properties":{
+		"id": {"type": "id", "uniqueItems":true, "required":false},
+		"title": {"type": "string", "uniqueItems":false, "required":false},
+		"coverage": {"type": "string", "uniqueItems":false, "required":false},
+		"vehicleTypes": {"type": "string", "uniqueItems":false, "required":false},
+		"dispatchInfo": {"type": "string", "uniqueItems":false, "required":false},
+		"generalInfo": {"type": "string", "uniqueItems":false, "required":false},
+		"url": {"type": "url", "uniqueItems":false, "required":false},
+		"Add More": {"type": "Add More", "uniqueItems":false, "required":false}
+	    }
+	}
+    }
+}

@@ -1,0 +1,132 @@
+{
+    "swaggerVersion":"1.0",
+    "apiVersion":"0.1",
+    "resourcePath":"/v1",
+    "basePath":"http://cityprojects.ro/transport-api/",
+    "apis":[{
+	"path":"/v1/city/{cityId}/routes",
+	"description":"Obtain information on available routes",
+	"operations":[{
+	    "summary":"List selected fields from all routes of a city.",
+	    "httpMethod":"GET",
+	    "nickname":"getRoutes",
+	    "responseClass":"Array[Route]",
+	    "parameters":[{
+		"name": "cityId",
+		"description":"City id",
+		"required":true,
+		"dataType":"id",
+		"paramType":"path",
+		"allowMultiple":false
+	    },{
+		"name": "fields",
+		"description":"Selected field names",
+		"required":true,
+		"dataType":"comma sepparated strings",
+		"paramType":"query",
+		"allowMultiple":false
+	    }],
+	    "errorResponses":[{
+		"reason":"Invalid field names supplied in fields parameter",
+		"code":400
+		},{
+		"reason":"Not authenticated",
+		"code":403
+		},{
+		"reason":"No city exists with the given ID",
+		"code":404
+		}],
+	    "notes": "Returns a json array of Route objects that contain only the fields specified in the request."
+	}]
+    },{
+	"path":"/v1/stop/{stopId}/routes",
+	"description":"Obtain information on available routes that pass through a stop",
+	"operations":[{
+	    "summary":"List selected fields from all routes that pass through a stop.",
+	    "httpMethod":"GET",
+	    "nickname":"getStopRoutes",
+	    "responseClass":"Array[Route]",
+	    "parameters":[{
+		"name": "stopId",
+		"description":"Stop id",
+		"required":true,
+		"dataType":"id",
+		"paramType":"path",
+		"allowMultiple":false
+	    },{
+		"name": "fields",
+		"description":"Selected field names",
+		"required":true,
+		"dataType":"comma sepparated strings",
+		"paramType":"query",
+		"allowMultiple":false
+	    }],
+	    "errorResponses":[{
+		"reason":"Invalid field names supplied in fields parameter",
+		"code":400
+		},{
+		"reason":"Not authenticated",
+		"code":403
+		},{
+		"reason":"No stop exists with the given ID",
+		"code":404
+		}],
+	    "notes": "Returns a json array of Route objects that contain only the fields specified in the request."
+	}]
+    },{
+	"path":"/v1/routes/{id}",
+	"description":"Obtain information on specified route",
+	"operations":[{
+	    "summary":"List selected fields from specified route.",
+	    "httpMethod":"GET",
+	    "nickname":"getRoute",
+	    "responseClass":"Route",
+	    "parameters":[{
+		"name": "id",
+		"description":"Route id",
+		"required":true,
+		"dataType":"id",
+		"paramType":"path",
+		"allowMultiple":false
+	    },{
+		"name": "fields",
+		"description":"Selected field names",
+		"required":true,
+		"dataType":"comma sepparated strings",
+		"paramType":"query",
+		"allowMultiple":false
+	    }],
+	    "errorResponses":[{
+		"reason":"Invalid field names supplied in fields parameter",
+		"code":400
+		},{
+		"reason":"Not authenticated",
+		"code":403
+		},{
+		"reason":"No route exists with the given ID",
+		"code":404
+		}],
+	    "notes": "Returns a json array of Route objects that contain only the fields specified in the request."
+	}]
+    }],
+    "models":{
+	"Route":{
+	    "uniqueItems":true,
+	    "id":"Route",
+	    "type":"any",
+	    "required":false,
+	    "properties":{
+		"id": {"type": "id", "uniqueItems":true, "required":false},
+		"eid": {"type": "string", "uniqueItems":false, "required":false},
+		"title": {"type": "string", "uniqueItems":false, "required":false},
+		"directionTitle": {"type": "string", "uniqueItems":false, "required":false},
+		"vehicleType": {"type": "tram|trolleybus|bus|metrobus|express|...", "uniqueItems":false, "required":false},
+		"type": {"type": "linear|cycle", "uniqueItems":false, "required":false},
+		"generalInfo": {"type": "string", "uniqueItems":false, "required":false},
+		"notices/news": {"type": "string", "uniqueItems":false, "required":false},
+		"url": {"type": "url", "uniqueItems":false, "required":false},
+		"Add More": {"type": "Add More", "uniqueItems":false, "required":false}
+	    }
+	}
+    }
+}

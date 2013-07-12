@@ -1,0 +1,11 @@
+{
+    "apiVersion":"0.1",
+    "swaggerVersion":"1.1",
+    "basePath":"http://tpt.wseas.ro:8080/swagger-tpt",
+    "apis":[
+	{"path":"/v1/cities.{format}","description":""},
+	{"path":"/v1/routes.{format}","description":""},
+	{"path":"/v1/stops.{format}","description":""},
+	{"path":"/v1/times.{format}","description":""}
+    ]
+}

@@ -1,0 +1,98 @@
+{
+    "swaggerVersion":"1.0",
+    "apiVersion":"0.1",
+    "resourcePath":"/v1",
+    "basePath":"http://cityprojects.ro/api/transport-api",
+    "apis":[{
+	"path":"/v1/stop/{stopId}/eta",
+	"description":"Obtain ETA information for incoming all vehicles",
+	"operations":[{
+	    "summary":"List selected ETA fields for all incoming vehicles.",
+	    "httpMethod":"GET",
+	    "nickname":"getStopETAs",
+	    "responseClass":"Array[ETA]",
+	    "parameters":[{
+		"name": "stopId",
+		"description":"Stop id",
+		"required":true,
+		"dataType":"id",
+		"paramType":"path",
+		"allowMultiple":false
+	    },{
+		"name": "fields",
+		"description":"Selected field names",
+		"required":true,
+		"dataType":"comma sepparated strings",
+		"paramType":"query",
+		"allowMultiple":false
+	    }],
+	    "errorResponses":[{
+		"reason":"Invalid field names supplied in fields parameter",
+		"code":400
+		},{
+		"reason":"Not authenticated",
+		"code":403
+		},{
+		"reason":"No stop exists with the given ID",
+		"code":404
+		}],
+	    "notes": "Returns a json array of City objects that contain only the fields specified in the request. Note that the documented list of fields names is not complete."
+	}]
+    },{
+	"path":"/v1/route/{routeId}/eta",
+	"description":"Obtain ETA information for all stations where a vehicle will stop",
+	"operations":[{
+	    "summary":"List selected ETA fields for all planned stops.",
+	    "httpMethod":"GET",
+	    "nickname":"getRouteETAs",
+	    "responseClass":"Array[ETA]",
+	    "parameters":[{
+		"name": "routeId",
+		"description":"Route id",
+		"required":true,
+		"dataType":"id",
+		"paramType":"path",
+		"allowMultiple":false
+	    },{
+		"name": "fields",
+		"description":"Selected field names",
+		"required":true,
+		"dataType":"comma sepparated strings",
+		"paramType":"query",
+		"allowMultiple":false
+	    }],
+	    "errorResponses":[{
+		"reason":"Invalid field names supplied in fields parameter",
+		"code":400
+		},{
+		"reason":"Not authenticated",
+		"code":403
+		},{
+		"reason":"No route exists with the given ID",
+		"code":404
+		}],
+	    "notes": "Returns a json array of City objects that contain only the fields specified in the request. Note that the documented list of fields names is not complete."
+	}]
+    }],
+    "models":{
+	"ETA":{
+	    "uniqueItems":true,
+	    "id":"ETA",
+	    "type":"any",
+	    "required":false,
+	    "properties":{
+		"id": {"type": "id", "uniqueItems":true, "required":false},
+		"stopId": {"type": "id", "uniqueItems":false, "required":false},
+		"routeId": {"type": "id", "uniqueItems":false, "required":false},
+		"stopIdx": {"type": "numeric", "uniqueItems":false, "required":false},
+		"ETA": {"type": "DeltaTime", "uniqueItems":false, "required":false},
+		"plannedArrivalTime": {"type": "time", "uniqueItems":false, "required":false},
+		"delay": {"type": "DeltaTime", "uniqueItems":false, "required":false},
+		"ballparkPrecision": {"type": "DeltaTime", "uniqueItems":false, "required":false},
+		"estimateType": {"type": "GPS|Historical|FixedSchedule|...", "uniqueItems":false, "required":false},
+		"vehicleState":  {"type": "Arriving|Boarding|Departing|FarAway", "uniqueItems":false, "required":false},
+		"Add More": {"type": "Add More", "uniqueItems":false, "required":false}
+	    }
+	}
+    }
+}
